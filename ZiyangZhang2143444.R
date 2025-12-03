@@ -323,5 +323,4 @@ new_patient
 pred_prob <- predict(fin_g, newdata = new_patient, type = "response")
 pred_prob
 
-install.packages("tinytex")
-tinytex::install_tinytex()
+
