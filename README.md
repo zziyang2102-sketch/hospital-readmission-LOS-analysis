@@ -13,9 +13,9 @@ This repository contains R code for:
 ## File Structure
 
 hospital-readmission-LOS-analysis/
-├── readmission_LOS_analysis.R   # Core R code (EDA + modeling)
-├── readmission.csv              # Sample patient dataset (de-identified)
-└── README.md                    # Project documentation
+├── readmission_LOS_analysis.R   
+├── readmission.csv             
+└── README.md                   
 
 ## Key Skills Demonstrated
 - **Data Wrangling**: Clean missing values, manage data types (factors/numerics).
