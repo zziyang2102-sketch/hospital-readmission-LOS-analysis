@@ -9,13 +9,13 @@ This repository contains R code for:
 3. Logistic regression modeling for readmission risk prediction.
 4. Model diagnostics (residual analysis, multicollinearity check).
 
-
 ## File Structure
 
+```text
 hospital-readmission-LOS-analysis/
-├── readmission_LOS_analysis.R   
-├── readmission.csv             
-└── README.md                   
+├── readmission_LOS_analysis.R   # Core R code (EDA + modeling)
+├── readmission.csv              # Sample patient dataset (de-identified)
+└── README.md                    # Project documentation
 
 ## Key Skills Demonstrated
 - **Data Wrangling**: Clean missing values, manage data types (factors/numerics).
