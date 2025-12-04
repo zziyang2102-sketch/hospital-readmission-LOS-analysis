@@ -18,6 +18,11 @@ hist(readmission$log_LOS,
      main = "Histogram of log(LOS)",
      xlab  = "log(LOS)")
 
+install.packages("e1071")  
+library(e1071)
+
+skewness(readmission$LOS)
+skewness(readmission$log_LOS)
 
 ## Task 1.2: Plot transformed LOS by a categorical predictor
 
@@ -67,28 +72,23 @@ par(mfrow = c(1, 1))
 
 ## Task 2.4: Detect unusual observations for m_red
 
-# Reduced model m_red:
-# m_red <- lm(log_LOS ~ Age + HCC.Riskscore +
-#                        DRG.Class + DRG.Complication,
-#             data = readmission)
-
-## 1. Standardised residuals
+# Standardised residuals
 r_std <- rstandard(m_red)
 
-## 2. Leverage (hat values)
+# Leverage (hat values)
 h <- hatvalues(m_red)
 
-## 3. Cook's distance
+# Cook's distance
 cook <- cooks.distance(m_red)
 
-## 4. Average leverage hbar = (p + 1) / n
-hbar <- mean(h)
+# Sample size n and number of predictors p (excluding intercept)
+n <- nobs(m_red)
+p <- length(coef(m_red)) - 1
 
-## 5. Sample size n and number of predictors p (excluding intercept)
-n <- nobs(m_red)                   # or n <- length(r_std)
-p <- length(coef(m_red)) - 1       # number of coefficients minus intercept
+# Average leverage: hbar = (p + 1) / n  (same as in the handout)
+hbar <- (p + 1) / n
 
-## 6. Benchmarks
+## Benchmarks (following the LRM R programming notes)
 
 # (a) Outliers: |standardised residual| > 3
 out_idx <- which(abs(r_std) > 3)
@@ -97,20 +97,19 @@ out_idx <- which(abs(r_std) > 3)
 lev_threshold <- 4 * hbar
 lev_idx <- which(h > lev_threshold)
 
-# (c) Influential points: Cook's D > 4 / (n - p - 1) (lecture rule)
+# (c) Influential points: Cook's distance > 4 / (n - p - 1)
 cook_threshold <- 4 / (n - p - 1)
 inf_idx <- which(cook > cook_threshold)
 
-## 7. Inspect results
-out_idx      # indices of outliers
-lev_idx      # indices of high leverage points
-inf_idx      # indices of influential points
+# Inspect indices
+out_idx        # potential outliers
+lev_idx        # high leverage points
+inf_idx        # influential points
 
-# View corresponding observations
+# Optional: look at the corresponding rows in the dataset
 readmission[out_idx, ]
 readmission[lev_idx, ]
 readmission[inf_idx, ]
-
 
 ## Task 2.5: Assess multicollinearity for m_red using VIF
 
@@ -173,17 +172,8 @@ anova(drop_g, g0, test = "Chisq")
 AIC(g0, drop_g)
 
 
-## Task 3.3: Residual diagnostics for the logistic GLM
-
-# (Model drop_g already fitted in Task 3.2)
 
 ## Task 3.3: Compare residual types and choose one for diagnostics
-
-# (Model drop_g already available)
-# drop_g <- glm(Readmission.Status ~ ER + HCC.Riskscore +
-#                                    DRG.Class + DRG.Complication,
-#               family = binomial(link = "logit"),
-#               data   = readmission)
 
 # statmod package is needed for quantile residuals
 library(statmod)
@@ -257,12 +247,6 @@ par(mfrow = c(1, 1))
 
 ## Task 3.4: Detect outliers (|standardised deviance residual| > 2.5)
 ##          and refit final model fin_g
-
-# Reduced logistic model from Task 3.2:
-# drop_g <- glm(Readmission.Status ~ ER + HCC.Riskscore +
-#                                    DRG.Class + DRG.Complication,
-#               family = binomial(link = "logit"),
-#               data   = readmission)
 
 ## 1. Compute standardised deviance residuals
 r_std_dev <- rstandard(drop_g, type = "deviance")   # as in the handout
