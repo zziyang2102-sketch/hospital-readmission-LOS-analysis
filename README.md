@@ -9,23 +9,18 @@ This repository contains R code for:
 3. Logistic regression modeling for readmission risk prediction.
 4. Model diagnostics (residual analysis, multicollinearity check).
 
-## File Structure
-
-```text
-hospital-readmission-LOS-analysis/
-├── readmission_LOS_analysis.R   # Core R code (EDA + modeling)
-├── readmission.csv              # Sample patient dataset (de-identified)
-└── README.md                    # Project documentation
+## Quick Access
+- [Full Project Report](report.pdf) (PDF: complete analysis, results, and conclusions)
+- [Analysis Code](ZiyangZhang2143444.R) (R script: reproducible code for data processing, modeling, and visualization)
+- [Patient Dataset](readmission.csv) (Desensitized input data)
 ```
-## Key Skills Demonstrated
-- **Data Wrangling**: Clean missing values, manage data types (factors/numerics).
-- **Custom Functions**: Build reusable functions for group mean calculation.
-- **Visualization**: Histograms, boxplots for exploratory analysis.
-- **Statistical Modeling**: Linear regression (LOS) & logistic regression (readmission).
-- **Model Validation**: Residual diagnostics, VIF for multicollinearity.
+## Key Skills Highlighted
+- Data Wrangling: Log transformation, factor level management, missing value handling.
+- Statistical Modeling: Linear regression (LOS) + logistic GLM (readmission), model selection (AIC/stepwise).
+- Diagnostics: Residual analysis, VIF (multicollinearity), influential point detection.
+- Visualization: Histograms, boxplots, Q-Q plots for exploratory analysis.
 
 
 ## Dependencies (R Packages)
-Install required packages before running:
 ```r
-install.packages(c("tidyverse", "car", "statmod"))
+install.packages(c("tidyverse", "car", "statmod", "e1071"))
