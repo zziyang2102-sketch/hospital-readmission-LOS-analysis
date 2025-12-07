@@ -13,7 +13,7 @@ This repository contains R code for:
 - [Full Project Report](report.pdf) (PDF: complete analysis, results, and conclusions)
 - [Analysis Code](ZiyangZhang2143444.R) (R script: reproducible code for data processing, modeling, and visualization)
 - [Patient Dataset](readmission.csv) (Desensitized input data)
-```
+
 ## Key Skills Highlighted
 - Data Wrangling: Log transformation, factor level management, missing value handling.
 - Statistical Modeling: Linear regression (LOS) + logistic GLM (readmission), model selection (AIC/stepwise).
